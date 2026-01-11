@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emir Haktan Polat - Matematik Projesi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CLASSY BLACK & GOLD CSS TASARIMI --- */
+        
+        /* Temel Ayarlar */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Merriweather', serif; 
+            background-color: #f5f5f5; /* Çok açık gri arka plan */
+            color: #333; /* Ana metin rengi (koyu gri) */
+            line-height: 2.1; 
+            font-size: 1.1rem; 
+        }
+
+        /* RENK PALETİ TANIMLARI (Referans için)
+           Siyah (Ana): #1a1a1a
+           Altın Sarısı (Vurgu): #ffc107
+           Koyu Gri (Metin): #333
+           Açık Gri (Arka Planlar): #f9f9f9 / #fff
+        */
+        
+        /* Navigasyon Çubuğu (Siyah ve Altın) */
+        .navbar {
+            background-color: #1a1a1a; /* Asil Siyah */
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Daha belirgin gölge */
+            border-bottom: 3px solid #ffc107; /* Altın çizgi */
+        }
+        .logo { color: #fff; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.4rem; letter-spacing: 1px; }
+        .logo span { color: #ffc107; /* Altın Sarısı Vurgu */ }
+        
+        .nav-links { list-style: none; display: flex; flex-wrap: wrap; }
+        .nav-links li { margin-left: 10px; }
+        .nav-links button {
+            background: none; 
+            border: 2px solid transparent; 
+            color: #ccc; /* Pasif link rengi */
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            font-family: 'Poppins', sans-serif; font-weight: 600;
+            transition: 0.3s;
+            padding: 10px 18px; 
+            border-radius: 30px; /* Daha yuvarlak butonlar */
+            letter-spacing: 0.5px;
+        }
+        /* Menü Butonu Hover ve Aktif Hali (Altın Arka Plan, Siyah Yazı) */
+        .nav-links button:hover, .nav-links button.active { 
+            color: #1a1a1a; 
+            background-color: #ffc107; 
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.4); /* Altın parlama efekti */
+        }
+
+        /* Ana İçerik Alanı */
+        .main-container { 
+            margin-top: 110px; 
+            padding: 70px 12%; 
+            min-height: 100vh; 
+            background-color: #fff; /* Beyaz kağıt hissi */
+            margin-left: auto; margin-right: auto; 
+            max-width: 1400px; 
+            border-left: 1px solid #e0e0e0; 
+            border-right: 1px solid #e0e0e0;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+        }
+        
+        /* Sayfa Geçiş Animasyonu */
+        .page-section { display: none; animation: fadeIn 0.8s ease-in-out; }
+        .page-section.active { display: block; }
+
+        /* Tipografi (Başlıklar) */
+        h1 { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 3rem; 
+            color: #1a1a1a; /* Siyah Başlık */
+            margin-bottom: 50px; 
+            border-bottom: 6px solid #ffc107; /* Kalın Altın Çizgi */
+            display: inline-block; 
+            padding-bottom: 15px; 
+            line-height: 1.2; 
+            font-weight: 700;
+        }
+        h2 { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 2rem; 
+            color: #1a1a1a; /* Siyah Alt Başlık */
+            margin-top: 70px; 
+            margin-bottom: 30px; 
+            border-left: 8px solid #ffc107; /* Altın Sol Çizgi */
+            padding-left: 25px; 
+            font-weight: 700;
+        }
+        h3 { 
+            font-size: 1.6rem; 
+            color: #555; /* Koyu Gri */
+            margin-top: 50px; 
+            font-weight: 700; 
+            border-bottom: 2px solid #ffc107; /* İnce Altın Çizgi */
+            padding-bottom: 10px; 
+            display: block; width: 100%; 
+        }
+        p { margin-bottom: 35px; text-align: justify; color: #444; }
+        
+        /* Alıntı Kutuları (Classy Stil) */
+        blockquote { 
+            font-family: 'Poppins', sans-serif;
+            font-style: italic; 
+            color: #1a1a1a;
+            border-left: 5px solid #ffc107; /* Altın Çizgi */
+            margin: 45px 0; 
+            padding: 30px; 
+            background: #fffce0; /* Çok açık sarı/krem arka plan */
+            border-radius: 0 15px 15px 0; 
+            font-size: 1.25rem;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.03);
+            position: relative;
+        }
+        blockquote::before { /* Tırnak İkonu */
+            content: '\201C'; font-size: 4rem; color: #ffc107; position: absolute; top: -10px; left: 10px; opacity: 0.3;
+        }
+        
+        /* Ses Kutusu (Classy Stil) */
+        .audio-box {
+            background: #fafafa; /* Çok açık gri */
+            border: 2px solid #ffc107; /* İnce Altın Çerçeve */
+            padding: 30px; 
+            margin: 60px 0; 
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative; overflow: hidden;
+        }
+        /* Ses kutusuna altın bir şerit detayı */
+        .audio-box::after { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%; background-color: #ffc107; }
+        
+        .welcome-audio {
+            background: #1a1a1a; /* Siyah Arka Plan */
+            border: 3px solid #ffc107;
+            margin: 40px auto; max-width: 800px; color: #ffc107;
+        }
+        .audio-box p { margin-bottom: 15px; font-weight: 700; color: #1a1a1a; font-size: 1.1rem; display: flex; align-items: center; }
+        .audio-box p i { color: #ffc107; font-size: 1.4rem; margin-right: 15px; }
+        .welcome-audio p { color: #ffc107; }
+        audio { width: 100%; outline: none; height: 45px; border-radius: 30px; }
+        /* Audio player renklerini tarayıcıya göre özelleştirmek zordur, bu haliyle siyah/sarı temaya uyacaktır */
+
+        /* Giriş Sayfası Özel */
+        #home-page { text-align: center; padding-top: 50px; }
+        .intro-text { font-size: 1.8rem; color: #1a1a1a; font-weight: 700; margin: 50px 0; }
+        
+        /* İsim Vurgusu (Siyah ve Altın) */
+        .author-name {
+            font-family: 'Poppins', sans-serif; font-size: 1.3rem; 
+            color: #ffc107; /* Altın Yazı */
+            background-color: #1a1a1a; /* Siyah Arka Plan */
+            padding: 15px 50px; 
+            border-radius: 50px; 
+            display: inline-block; margin-top: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 2px solid #ffc107;
+        }
+
+        /* Büyük Butonlar (Altın Arka Plan, Siyah Yazı) */
+        .big-btn {
+            display: inline-block; padding: 20px 70px; 
+            background-color: #ffc107; /* Altın Sarısı */
+            color: #1a1a1a; /* Siyah Yazı */
+            font-family: 'Poppins', sans-serif; text-decoration: none; font-size: 1.4rem; border-radius: 50px; 
+            margin-top: 60px; transition: 0.4s; cursor: pointer; font-weight: 700;
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.4); border: none;
+        }
+        .big-btn:hover { 
+            background-color: #e6ac00; /* Biraz daha koyu altın */
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 15px 35px rgba(255, 193, 7, 0.6);
+        }
+        /* Siyah buton versiyonu (Kaynakça vb. için) */
+        .big-btn.dark {
+            background-color: #1a1a1a; color: #ffc107; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .big-btn.dark:hover { background-color: #333; color: #fff; }
+
+        /* Kaynakça Listesi */
+        .reference-list li { 
+            background: #fff;
+            margin-bottom: 25px; font-size: 1.05rem; 
+            border-bottom: 2px solid #eee; 
+            padding: 20px; 
+            border-left: 5px solid transparent;
+            transition: 0.3s;
+        }
+        .reference-list li:hover {
+            border-left-color: #ffc107; /* Hoverda altın çizgi */
+            background: #fffce0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+        }
+        .reference-list li i { color: #ffc107; margin-right: 15px; font-size: 1.2rem; }
+        strong { color: #1a1a1a; font-weight: 700; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobil Uyum */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 15px 10px; }
+            .nav-links { margin-top: 20px; justify-content: center; gap: 10px; }
+            .main-container { padding: 40px 5%; margin-top: 220px; }
+            h1 { font-size: 2.2rem; border-width: 4px; }
+            .nav-links button { padding: 8px 14px; font-size: 0.8rem; }
+            .big-btn { padding: 15px 40px; font-size: 1.1rem; width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Emir Haktan <span>Polat</span></div>
+        <ul class="nav-links">
+            <li><button onclick="showPage('home-page')" class="active">Hoş Geldiniz</button></li>
+            <li><button onclick="showPage('definition-page')">Matematik Nedir?</button></li>
+            <li><button onclick="showPage('history-page')">Nasıl Doğdu?</button></li>
+            <li><button onclick="showPage('philosophy-page')">Bilimlerden Farkı</button></li>
+            <li><button onclick="showPage('life-page')">Günlük Hayat</button></li>
+            <li><button onclick="showPage('references-page')">Kaynakça</button></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+
+        <div id="home-page" class="page-section active">
+            <h1>Matematik: Evrenin Dili</h1>
+            
+            <div class="author-name">Hazırlayan: Emir Haktan Polat</div>
+
+            <p class="intro-text">
+                Matematiğin gerçeklerini öğrenmek için hoş geldiniz.
+            </p>
+
+            <div class="audio-box welcome-audio">
+                <p><i class="fas fa-info-circle"></i> Site Kullanım Rehberi (Sesli Dinle):</p>
+                <audio controls>
+                    <source src="giris.mp3" type="audio/mpeg">
+                    Tarayıcınız ses dosyasını desteklemiyor.
+                </audio>
+            </div>
+
+            <p style="text-align: center; max-width: 900px; margin: 0 auto; color: #555; font-size: 1.2rem; line-height: 1.8;">
+                Bu proje; sayıların gizemli dünyasından başlayarak, matematiğin insanlık tarihindeki evrimini, bilim felsefesindeki eşsiz yerini ve modern teknolojinin ardındaki görünmez gücünü araştıran kapsamlı bir çalışmadır.
+            </p>
+
+            <button class="big-btn" onclick="showPage('definition-page')">İncelemeye Başla</button>
+        </div>
+
+        <div id="definition-page" class="page-section">
+            <h1>Matematik Nedir?</h1>
+            
+            <div class="audio-box">
+                <p><i class="fas fa-microphone"></i> Bölüm Özeti (Sesli Dinle):</p>
+                <audio controls><source src="ses_nedir.mp3" type="audio/mpeg"></audio>
+            </div>
+
+            <p>Matematiğin ne olduğunu tanımlamak, yüzyıllardır bilim insanlarını, filozofları ve sanatçıları meşgul eden, tek bir cevabı olmayan derin bir sorudur. Sözlüklerde genellikle "sayılar, biçimler, nicelikler ve bunların arasındaki ilişkileri inceleyen bilim dalı" olarak geçiştirilse de, matematik bundan çok daha fazlasıdır. Ünlü fizikçi ve astronom Galileo Galilei'ye göre matematik; <strong>"Tanrı'nın evreni yazdığı dil"</strong>dir. Alman matematikçi Carl Friedrich Gauss'a göre ise o, <strong>"Tüm bilimlerin kraliçesi"</strong>dir.</p>
+
+            <h2>Etimolojik ve Kavramsal Köken</h2>
+            <p>"Matematik" kelimesi, Antik Yunanca'da "öğrenilmesi gereken şey, bilgi, bilim" anlamına gelen <em>mathema</em> sözcüğünden türemiştir. Bu etimolojik köken bile, antik dünyada insanların matematiği sadece bir hesaplama aracı olarak değil, "bilginin en saf hali" olarak gördüklerini kanıtlar. Matematik, kaosun içindeki düzeni görme sanatıdır. Bir müzik parçasındaki notaların harmonisinden, gezegenlerin yörüngesindeki eliptik hareketlere; bir ayçiçeğinin tohum dizilimindeki spirallerden, atom altı parçacıkların davranışından borsa grafiklerine kadar evrenin her yerinde var olan "örüntüleri" (patterns) inceleyen evrensel bir disiplindir.</p>
+
+            <h2>Soyutlamanın Zirvesi</h2>
+            <p>Matematiği diğer tüm disiplinlerden ayıran ve onu insan zihninin en üstün başarısı yapan özellik "soyutlama" gücüdür. Doğada "3" diye fiziksel bir nesne yoktur. 3 elma, 3 ağaç veya 3 taş görebilirsiniz; ancak "3" kavramı tamamen zihinsel bir inşadır. İnsan zihni, elmadan, ağaçtan ve taştan "3" olma özelliğini soyutlayıp, bu kavram üzerinde işlemler yapmaya başladığında matematik doğmuştur. İngiliz filozof Bertrand Russell, bu durumu şöyle özetler:</p>
+            <blockquote>"İki elma ile iki günün ortak bir yanı olduğunu (2 sayısı) fark etmek, insanlık tarihindeki en büyük zihinsel sıçramadır."</blockquote>
+            <p>Matematik, fiziksel dünyadan bağımsız bir "semboller ve kurallar" sistemidir. Bir kez kuralları (aksiyomları) belirlediğinizde, bu kurallar sizi hiç bilmediğiniz, hiç görmediğiniz dünyalara götürebilir. Örneğin 4. boyutu göremeyiz ama matematiğini yapabiliriz. Sonsuzluğu hayal edemeyiz ama matematikte sonsuzluklarla (Cantor'un kümeler teorisi gibi) işlem yapabiliriz.</p>
+        </div>
+
+        <div id="history-page" class="page-section">
+            <h1>Matematik Nasıl Doğmuştur?</h1>
+            
+            <div class="audio-box">
+                <p><i class="fas fa-microphone"></i> Bölüm Özeti (Sesli Dinle):</p>
+                <audio controls><source src="ses1.mp3" type="audio/mpeg"></audio>
+            </div>
+
+            <h2>Tarih Öncesi Çağlar: Sayı Hissi ve İlk Kayıtlar</h2>
+            <p>Matematiğin tarihi, yazının icadından bile eskiye, insanlığın avcı-toplayıcı olduğu Paleolitik çağlara kadar uzanır. İnsan zihni, karmaşık bir dili geliştirmeden önce bile "miktar" kavramını algılayabiliyordu. Arkeolojik kazılarda bulunan kemikler üzerindeki çentikler, atalarımızın sadece avladıkları hayvanları saymadığını, aynı zamanda zamanı ve ayın evrelerini kaydettiğini göstermektedir.</p>
+            <p>1960 yılında Afrika'nın Kongo bölgesinde bulunan ve M.Ö. 20.000 yıllarına tarihlenen <strong>Ishango Kemiği</strong>, bunun en çarpıcı ve somut kanıtıdır. Kemiğin üzerindeki çizgiler rastgele çizikler değildir; bunlar asal sayılar (11, 13, 17, 19) ve basit çarpma işlemleri içeren bir mantık dizisine sahiptir. Bu bulgu, insanın kaotik ve tehlikeli bir dünyada hayatta kalabilmek için "düzeni" arayışının ilk adımıdır. Avcı-toplayıcı topluluklar için "kışın gelmesine kaç gün kaldığı" veya "sürünün eksilip eksilmediği" bilgisi, bir matematiksel merak değil, ölüm-kalım meselesiydi.</p>
+
+            <h2>Mezopotamya ve Babil: Gökyüzünün Matematiği</h2>
+            <p>İnsanlık tarım devrimiyle birlikte yerleşik hayata geçince, matematiksel ihtiyaçlar da karmaşıklaştı. M.Ö. 3000 civarında Mezopotamya'da (bugünkü Irak) yaşayan Sümerler ve sonrasında Babilliler, bugün bile hayranlık uyandıran gelişmiş bir matematik sistemi kurdular. Babilliler, sayı tabanı olarak bizim gibi 10'u değil, 60'ı (Seksagesimal Sistem) kullanıyorlardı.</p>
+            <p>Peki neden 60? Çünkü 60 sayısı; 2, 3, 4, 5, 6, 10, 12, 15, 20 ve 30'a tam bölünebilen muazzam bir sayıdır. Bu sistem sayesinde kesirli işlemleri ve astronomik hesapları çok kolay yapabiliyorlardı. Bugün bir saatin 60 dakika, bir dakikanın 60 saniye ve bir dairenin 360 derece olmasının tek sebebi, 4000 yıl önceki Babillilerin bu tercihidir. Onlar gökyüzünü o kadar hassas gözlemlediler ki, modern trigonometrinin temellerini attılar.</p>
+
+            <h2>Antik Mısır: Nil'in Armağanı Geometri</h2>
+            <p>Mısır medeniyetinde matematik, tamamen pratik ve bürokratik sorunları çözmek için gelişti. Yunan tarihçi Herodot'un dediği gibi, "Mısır, Nil'in bir armağanıdır." Ancak Nil Nehri her yıl taştığında, tarım arazilerinin sınırlarını siliyor ve kimin arazisinin nerede başlayıp bittiği konusunda büyük kavgalar çıkıyordu. Firavunlar, bu sorunu çözmek ve vergileri doğru toplamak için "Harpedonaptae" (İp Gericiler) adı verilen matematikçi rahipleri görevlendirdi.</p>
+            <p>"Geometri" kelimesi Yunanca "Geo" (Yer) ve "Metron" (Ölçüm) kelimelerinden türemiştir; yani doğuş sebebi tam anlamıyla "yer ölçümü"dür. M.Ö. 1650 yılına tarihlenen ünlü <strong>Rhind Papirüsü</strong>, Mısırlıların sadece arazi ölçmekle kalmayıp; devasa piramitlerin eğimini hesaplamak, işçilere ekmek ve bira dağıtımını adil yapmak ve tahıl ambarlarının hacmini ölçmek için karmaşık formüller geliştirdiğini gösterir. Mısırlılar için matematik bir felsefe değil, devleti yönetme aracıydı.</p>
+
+            <h2>Antik Yunan: "Nasıl"dan "Neden"e Geçiş</h2>
+            <p>Mısır ve Babil matematiği tamamen "pratik"ti ve "Nasıl?" sorusuna odaklanmıştı. "Alan nasıl bulunur?", "Faiz nasıl hesaplanır?". Ancak M.Ö. 6. yüzyılda Thales ve Pisagor gibi düşünürler, insanlık tarihinde bir devrim yaratarak <strong>"Neden?"</strong> sorusunu sordular. Bu, matematiğin "pratik bir araç" olmaktan çıkıp "teorik ve ispatlı bir bilime" dönüştüğü kırılma noktasıdır.</p>
+            <p>İskenderiye'de yaşayan Öklid, M.Ö. 300 civarında yazdığı "Elementler" adlı eseriyle geometriyi sadece 5 temel kabul (aksiyom) üzerine kurarak, sonraki 2000 yıl boyunca tüm dünyanın ders kitabı olacak bir şaheser yarattı. Yunanlıların en büyük katkısı "İspat" kavramıdır. Bir şeyi gözlemlemek yetmez, onun mantıksal olarak kesinliğini kanıtlamak gerekir.</p>
+        </div>
+
+        <div id="philosophy-page" class="page-section">
+            <h1>Diğer Bilimlerden Farkı Nedir?</h1>
+
+            <div class="audio-box">
+                <p><i class="fas fa-microphone"></i> Bölüm Özeti (Sesli Dinle):</p>
+                <audio controls><source src="ses2.mp3" type="audio/mpeg"></audio>
+            </div>
+
+            <h2>Metodolojik Ayrım: Tümevarım ve Tümdengelim</h2>
+            <p>Genellikle matematik; fizik, kimya veya biyoloji ile aynı "Pozitif Bilimler" kategorisinde değerlendirilir. Ancak metodolojik olarak matematik, doğa bilimlerinden tamamen farklı, hatta zıt bir yapıya sahiptir. Doğa bilimleri (Fizik, Biyoloji, Kimya) <strong>Tümevarım (Induction)</strong> yöntemini kullanır. Yani bilim insanları doğayı gözlemler, binlerce deney yapar ve bu gözlemlerden yola çıkarak genel bir yasa formüle etmeye çalışırlar.</p>
+            <p>Ancak bu yöntem asla "mutlak kesinlik" veremez. Karl Popper'ın ünlü "Kuğu Örneği"nde belirttiği gibi: Bir biyolog milyonlarca beyaz kuğu gördükten sonra "Tüm kuğular beyazdır" diyebilir. Ancak Avustralya'da tek bir siyah kuğu bulunması, bu "bilimsel yasayı" yerle bir etmeye yeter. Bilim tarihi, yanlışlanmış ve terk edilmiş teoriler mezarlığıdır. Newton fiziği 250 yıl boyunca evrenin mutlak doğrusu sanıldı, ta ki Einstein gelip ışık hızına yakın durumlarda Newton yasalarının çalışmadığını kanıtlayana kadar.</p>
+
+            <h2>Matematiğin Mutlaklığı: Apriori Bilgi</h2>
+            <p>Matematik ise doğa bilimlerinin aksine <strong>Tümdengelim (Deduction)</strong> yöntemini kullanır. Matematikte laboratuvar tüpleri, mikroskoplar veya teleskoplar yoktur; laboratuvar tamamen insan zihnidir. Bir matematiksel teorem (örneğin Pisagor Teoremi: a² + b² = c²), deneyle test edilmez, mantıksal zorunlulukla ispatlanır. Bu yüzden matematiksel doğrular <strong>Apriori</strong> (deneyden bağımsız) ve mutlaktır.</p>
+            <p>Pisagor teoremi M.Ö. 500 yılında da doğruydu, bugün de %100 doğrudur, bundan milyarlarca yıl sonra Andromeda Galaksisi'nde de doğru olacaktır. Siyasi rejimler değişir, fizik teorileri çöker, biyolojik türler yok olur ama 7 sayısının asal olduğu gerçeği asla değişmez. Matematik, evrenin değişmeyen, zamansız ve mekanlar üstü tek hakikatidir. Bu yönüyle matematik, insan bilgisinin ulaşabileceği en yüksek kesinlik seviyesidir.</p>
+
+            <h2>Ontolojik Tartışma: İcat mı, Keşif mi?</h2>
+            <p>Matematiğin bu olağanüstü kesinliği ve doğayı açıklama gücü, yüzyıllardır filozofları meşgul eden derin bir soruyu doğurmuştur: <strong>"Matematik insan zihninin bir icadı mıdır, yoksa evrende bizden bağımsız olarak var olan bir gerçekliğin keşfi midir?"</strong></p>
+
+            <h3>1. Platonizm (Keşif Görüşü)</h3>
+            <p>Antik Yunan filozofu Platon'a ve onun modern takipçilerine (örneğin Kurt Gödel, Roger Penrose) göre; matematiksel nesneler (sayılar, kümeler, geometrik şekiller), fiziksel dünyadan bağımsız, ideal bir "Formlar Dünyası"nda zaten mevcuttur. Biz matematikçiler, tıpkı yeni bir kıtayı keşfeden kaşifler gibi, bu soyut dünyayı zihnimizle "keşfederiz". Pi sayısı, insanlık yok olsa bile, bir dairenin çevresinin çapına oranı olarak var olmaya devam edecektir. Biz onu icat etmedik, orada olduğunu fark ettik.</p>
+
+            <h3>2. Formalizm (İcat Görüşü)</h3>
+            <p>David Hilbert gibi formalistlere göre ise matematik, insan beyninin ürettiği karmaşık bir "sembol oyunudur". Satranç oyununu nasıl biz insanlar uydurduysak ve kurallarını belirlediysek, matematiği de biz uydurduk. Doğada "2" diye bir nesne yoktur; sadece iki elma veya iki taş vardır. "2" kavramı, insan zihninin soyutlama yeteneğinin bir ürünüdür. Bu görüşe göre matematik evrensel bir gerçeklik değil, insan kültürünün bir parçasıdır.</p>
+        </div>
+
+        <div id="life-page" class="page-section">
+            <h1>Günlük Hayat Problemleri Şart mı?</h1>
+
+            <div class="audio-box">
+                <p><i class="fas fa-microphone"></i> Bölüm Özeti (Sesli Dinle):</p>
+                <audio controls><source src="ses3.mp3" type="audio/mpeg"></audio>
+            </div>
+
+            <h2>Problem Çözme ve Motivasyon Aracı</h2>
+            <p>Projenin en can alıcı sorularından biri şudur: "Matematiği iyi öğrenmek için günlük hayat problemlerine gerçekten ihtiyaç var mı?" Cevap pedagojik açıdan bakıldığında, <strong>"Evet"</strong>tir. Çünkü insan beyni, somut bir karşılığı olmayan soyut kavramları öğrenmekte zorlanır. "Bakkalda bu ne işime yarayacak?" sorusu, aslında öğrencinin zihninde anlam arayışıdır. Günlük hayat problemleri (faiz hesabı, köprü statiği, alışveriş), matematiğin "işe yaradığını" göstererek öğrenme motivasyonunu artırır.</p>
+
+            <h2>Asıl Amaç: Düşünmeyi Öğrenmek (Hayır, Şart Değil)</h2>
+            <p>Ancak matematiğin özüne ve felsefesine indiğimizde, cevap <strong>"Hayır"</strong>dır. Matematiği öğrenmek için mutlaka bakkal hesabına veya mühendislik problemlerine ihtiyacımız yoktur. Çünkü matematiğin asıl amacı, bize somut problemleri çözdürmek değil, <strong>"soyut ve analitik düşünmeyi"</strong> öğretmektir. Matematik, beynin en etkili spor salonudur.</p>
+            <p>Karmaşık bir matematik problemini çözerken beyninizde gelişen nöral bağlantılar ve disiplin; bir avukatın savunma hazırlarken, bir yöneticinin kriz anında strateji belirlerken, bir yazılımcının algoritma kurarken veya bir doktorun teşhis koyarken kullandığı mantık sürecinin ta kendisidir. Matematik bize sorunu parçalara ayırmayı, veriler arasında ilişki kurmayı, sebep-sonuç ilişkisini görmeyi ve duygulardan arınmış mantıksal bir yol izlemeyi öğretir. Dolayısıyla matematik sadece sayıların bilimi değil, doğru düşünmenin sanatıdır.</p>
+
+            <h2>Günlük Hayatın Görünmeyen Yüzü</h2>
+            <p>Biz fark etmesek de, matematik modern hayatın her anında, perde arkasında çalışmaya devam eder:</p>
+            <ul>
+                <li><strong>Kriptografi ve Güvenlik:</strong> Kredi kartı şifreleriniz, e-devlet girişiniz ve WhatsApp mesajlarınızın güvenliği, 17. yüzyılda "hiçbir işe yaramaz" sanılan Asal Sayılar Teorisi (RSA Algoritması) sayesinde sağlanır.</li>
+                <li><strong>Tıp ve Görüntüleme:</strong> Hastanelerdeki MR ve Tomografi cihazları, Johann Radon'un bulduğu "İntegral Dönüşümleri" sayesinde vücudun içini kesip biçmeden görüntüler.</li>
+                <li><strong>Hava Durumu:</strong> Meteorologlar, Kaos Teorisi ve Diferansiyel Denklemler kullanarak atmosferi modelleyip fırtınaları tahmin ederler.</li>
+                <li><strong>Arama Motorları:</strong> Google'da bir şey aradığınızda, Lineer Cebir ve Matrisler devreye girerek milyarlarca sonuç arasından en doğrusunu saniyeler içinde karşınıza getirir.</li>
+            </ul>
+        </div>
+
+        <div id="references-page" class="page-section">
+            <h1>Yararlanılan Kaynaklar</h1>
+            <p>Bu projenin hazırlanmasında, matematik tarihi, bilim felsefesi ve matematik eğitimi alanında otorite kabul edilen aşağıdaki kaynaklardan yararlanılmıştır:</p>
+            
+            <ul class="reference-list">
+                <li><i class="fas fa-book"></i> <strong>Burton, David M. (2011).</strong> <em>The History of Mathematics: An Introduction.</em> McGraw-Hill Education.</li>
+                <li><i class="fas fa-book"></i> <strong>Sertöz, Sinan. (2002).</strong> <em>Matematiğin Aydınlık Dünyası.</em> Tübitak Yayınları.</li>
+                <li><i class="fas fa-book"></i> <strong>Wigner, Eugene P. (1960).</strong> <em>"The Unreasonable Effectiveness of Mathematics in the Natural Sciences".</em> Communications in Pure and Applied Mathematics.</li>
+                <li><i class="fas fa-book"></i> <strong>Stewart, Ian. (2008).</strong> <em>Taming the Infinite: The Story of Mathematics.</em> Quercus Publishing.</li>
+                <li><i class="fas fa-book"></i> <strong>Nesin, Ali. (2009).</strong> <em>Matematik ve Korku.</em> Nesin Yayıncılık.</li>
+                <li><i class="fas fa-book"></i> <strong>Penrose, Roger. (1989).</strong> <em>The Emperor's New Mind.</em> Oxford University Press.</li>
+                <li><i class="fas fa-laptop"></i> <strong>Wolfram MathWorld & Britannica Archives</strong> (Dijital Ansiklopedik Veriler).</li>
+            </ul>
+
+            <button class="big-btn dark" onclick="showPage('home-page')">Ana Sayfaya Dön</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Sayfa Geçiş Sistemi
+        function showPage(pageId) {
+            // Tüm sayfaları gizle
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Seçilen sayfayı göster
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Menü butonunu aktif yap
+            const buttons = document.querySelectorAll('.nav-links button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            const activeBtn = document.querySelector(`.nav-links button[onclick="showPage('${pageId}')"]`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Sayfanın en üstüne kaydır (yumuşak geçişle)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
